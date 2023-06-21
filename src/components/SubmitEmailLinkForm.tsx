@@ -1,16 +1,17 @@
 
-import { Button, FormControl, FormLabel, Box, Typography, Input, Grid, Container } from '@mui/joy';
+import { Button, FormControl, FormLabel, Box, Typography, Input, Grid, Container, IconButton, IconButtonProps, useColorScheme } from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent } from 'preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { CREATE_API_BASE } from '../api/V1LinkCreation';
+
 
 const SubmitEmailLinkForm: FunctionComponent = () => {
     const [link, setLink] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState(false);
 
-    const makeApiRequest = (brand, link: string, documentType: string, requiredContent: string, name: string, email: string) => {
+    const makeApiRequest = (brand: string, link: string, documentType: string, requiredContent: string, name: string, email: string) => {
         setIsLoading(true);
         axios.post(CREATE_API_BASE + 'v1/CreateRedirectEmail', {
             brand,
@@ -49,7 +50,21 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                 <br />
                 <form
                     onSubmit={(event: any) => {
-                        // your onSubmit code
+                        const formElements = event.currentTarget.elements;
+                        debugger;
+                        const data = {
+                            url: formElements.url.value,
+                            password: formElements.password.value,
+                            email: formElements.email.value,
+                            name: formElements.name.value,
+                            documentType: formElements.documentType.value,
+                            requiredContent: formElements.requiredContent.value,
+                            brandname: formElements.brandname.value,
+                            brandlogoURL: formElements.brandlogoURL.value,
+                            brandPrimaryColor: formElements.brandPrimaryColor.value,
+                            brandSecondaryColor: formElements.brandSecondaryColor.value
+                        };
+                        makeApiRequest(data.url, data.password);
                     }}
                 >
                     <Grid container columnGap={3} spacing={2} sx={{ flexGrow: 1 }}>

@@ -1,13 +1,57 @@
 import { FunctionComponent } from 'preact';
-import { CssVarsProvider } from '@mui/joy/styles';
+import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
 import { route } from 'preact-router';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
+import { IconButton, IconButtonProps } from '@mui/joy';
+import { useEffect, useState } from 'preact/hooks';
 
 
+function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
+    const { mode, setMode } = useColorScheme();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+    if (!mounted) {
+        return <IconButton size="sm" variant="plain" color="neutral" disabled />;
+    }
+    return (
+
+        <IconButton
+            id="toggle-mode"
+            size="sm"
+            variant="plain"
+            color="neutral"
+            aria-label="toggle light/dark mode"
+            {...props}
+            onClick={(event: any) => {
+                if (mode === 'light') {
+                    setMode('dark');
+                } else {
+                    setMode('light');
+                }
+                onClick?.(event);
+            }}
+        >
+            <img
+                src="src\assets\Aegisvault_Logo_Circle.png" // Make sure this is the correct path
+                style={{
+                    width: '100px',
+                    height: '100px',
+                    gridRow: '1 / 3', // Span two rows
+                    gridColumn: '1', // Be in the first column
+                }}
+                alt="Logo"
+            />
+        </IconButton>
+    );
+}
 
 
 const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => {
@@ -68,19 +112,10 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                                 gap: '10px', // Optional: Add some gap between grid items
                             }}
                         >
-                            <img
-                                src="src\assets\Aegisvault_Logo_Circle.png" // Make sure this is the correct path
-                                onClick={() => route('/')}
-                                style={{
-                                    width: '130px',
-                                    height: '130px',
-                                    gridRow: '1 / 3', // Span two rows
-                                    gridColumn: '1', // Be in the first column
-                                }}
-                                alt="Logo"
-                            />
+                            <ColorSchemeToggle />
+
                             <Typography
-                                fontSize="40px"
+                                fontSize="30px"
                                 fontWeight="lg"
                                 style={{
                                     gridRow: '1', // Be in the first row

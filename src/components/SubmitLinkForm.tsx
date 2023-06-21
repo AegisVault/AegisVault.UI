@@ -63,7 +63,6 @@ const SubmitLinkForm: FunctionComponent = () => {
                                         password: formElements.password.value,
                                     };
                                     makeApiRequest(data.url, data.password);
-                                    alert(JSON.stringify(data, null, 2));
                                 }}
                             >
                                 <FormControl required>
