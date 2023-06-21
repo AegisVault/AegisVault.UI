@@ -57,7 +57,6 @@ const SubmitLinkForm: FunctionComponent = () => {
                                 onSubmit={(event: any) => {
                                     event.preventDefault();
                                     const formElements = event.currentTarget.elements;
-                                    debugger;
                                     const data = {
                                         url: formElements.url.value,
                                         password: formElements.password.value,

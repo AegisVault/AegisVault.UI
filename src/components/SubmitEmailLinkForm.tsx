@@ -50,7 +50,6 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                 <form
                     onSubmit={(event: any) => {
                         const formElements = event.currentTarget.elements;
-                        debugger;
                         const data = {
                             url: formElements.url.value,
                             password: formElements.password.value,

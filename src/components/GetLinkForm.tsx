@@ -62,12 +62,10 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                                 onSubmit={(event: any) => {
                                     event.preventDefault();
                                     const formElements = event.currentTarget.elements;
-                                    debugger;
                                     const data = {
                                         password: formElements.password.value,
                                     };
                                     makeApiRequest(data.password);
-                                    alert(JSON.stringify(data, null, 2));
                                 }}
                             >
                                 <FormControl required>
