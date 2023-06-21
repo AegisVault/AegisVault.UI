@@ -38,7 +38,12 @@ const SubmitForm: FunctionComponent = () => {
     return (
         <>
             {!isLoading ?
-                apiSuccess ? <h1 onClick={copyToClipboard}>Success, click here to copy your link</h1>
+                apiSuccess
+                    ? <>
+                        <h1 onClick={copyToClipboard}>Success, click here to copy your link</h1>
+                        <h4>{link}</h4>
+                        <Button onClick={copyToClipboard}>Copy</Button>
+                    </>
                     : <>
                         <div>
                             <div>
