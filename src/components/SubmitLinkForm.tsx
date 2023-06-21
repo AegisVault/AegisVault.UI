@@ -3,7 +3,7 @@ import { Button, FormControl, FormLabel, Box, Typography, Input } from '@mui/joy
 import axios from 'axios';
 import { FunctionComponent } from 'preact';
 import { useState } from 'preact/hooks';
-import { RETRIEVE_API_BASE } from '../api/V1LinkCreation';
+import { CREATE_API_BASE } from '../api/V1LinkCreation';
 
 const SubmitLinkForm: FunctionComponent = () => {
     const [link, setLink] = useState("");
@@ -12,7 +12,7 @@ const SubmitLinkForm: FunctionComponent = () => {
 
     const makeApiRequest = (url: string, password: string) => {
         setIsLoading(true);
-        axios.post(RETRIEVE_API_BASE + 'v1/CreateLink', {
+        axios.post(CREATE_API_BASE + 'v1/CreateLink', {
             URL: url,
             Password: password
         })
