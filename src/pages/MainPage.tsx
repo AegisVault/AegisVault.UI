@@ -5,11 +5,12 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
+import { route } from 'preact-router';
 
 
 
 
-const MainPage: FunctionComponent<{title: string}> = ({title, children}) => {
+const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => {
     return (
         <div class={title}>
             <CssVarsProvider
@@ -59,32 +60,47 @@ const MainPage: FunctionComponent<{title: string}> = ({title, children}) => {
                             component="header"
                             sx={{
                                 py: 3,
-                                display: 'flex',
+                                display: 'grid',
+                                gridTemplateColumns: 'auto auto', // Create two columns
+                                gridTemplateRows: 'auto auto', // Create two rows
                                 alignItems: 'center',
-                                justifyContent: 'space-between',
+                                justifyContent: 'start', // Align items to the start
+                                gap: '10px', // Optional: Add some gap between grid items
                             }}
                         >
+                            <img
+                                src="src\assets\Aegisvault_Logo_Circle.png" // Make sure this is the correct path
+                                onClick={() => route('/')}
+                                style={{
+                                    width: '130px',
+                                    height: '130px',
+                                    gridRow: '1 / 3', // Span two rows
+                                    gridColumn: '1', // Be in the first column
+                                }}
+                                alt="Logo"
+                            />
                             <Typography
+                                fontSize="40px"
                                 fontWeight="lg"
-                                startDecorator={
-                                    <Box
-                                        component="span"
-                                        sx={{
-                                            width: 24,
-                                            height: 24,
-                                            background: (theme) =>
-                                                `linear-gradient(45deg, ${theme.vars.palette.primary.solidBg}, ${theme.vars.palette.primary.solidBg} 30%, ${theme.vars.palette.primary.softBg})`,
-                                            borderRadius: '50%',
-                                            boxShadow: (theme) => theme.shadow.md,
-                                            '--joy-shadowChannel': (theme) =>
-                                                theme.vars.palette.primary.mainChannel,
-                                        }}
-                                    />
-                                }
+                                style={{
+                                    gridRow: '1', // Be in the first row
+                                    gridColumn: '2', // Be in the second column
+                                }}
                             >
                                 AegisVault
                             </Typography>
+                            <Typography
+                                style={{
+                                    color: '#394855',
+                                    gridRow: '2', // Be in the second row
+                                    gridColumn: '2', // Be in the second column
+                                }}
+                            >
+                                Slightly better than typing out that long URL.
+                            </Typography>
                         </Box>
+
+
                         <Box
                             component="main"
                             sx={{
@@ -112,7 +128,7 @@ const MainPage: FunctionComponent<{title: string}> = ({title, children}) => {
                         </Box>
                         <Box component="footer" sx={{ py: 3 }}>
                             <Typography level="body3" textAlign="center">
-                                © AegisVault {new Date().getFullYear()}
+                                © AegisVault {new Date().getFullYear()} - Pigeon 🐦
                             </Typography>
                         </Box>
                     </Box>
