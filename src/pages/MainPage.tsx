@@ -5,14 +5,13 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
-import SubmitForm from '../components/GetLinkForm';
 
 
 
 
 const MainPage: FunctionComponent<{title: string}> = ({title, children}) => {
     return (
-        <div>
+        <div class={title}>
             <CssVarsProvider
                 defaultMode="light"
                 disableTransitionOnChange

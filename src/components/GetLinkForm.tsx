@@ -2,7 +2,7 @@
 import { Button, FormControl, FormLabel, Box, Typography, Input } from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { RETRIEVE_API_BASE } from '../api/V1LinkCreation';
 
 interface RouteParams {
