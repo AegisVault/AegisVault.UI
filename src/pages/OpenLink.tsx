@@ -7,7 +7,7 @@ import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
 import SubmitForm from '../components/SubmitLinkForm';
 
-const CreateLink: FunctionComponent = () => {
+const OpenLink: FunctionComponent = () => {
     return (
         <div>
             <CssVarsProvider
@@ -143,4 +143,4 @@ const CreateLink: FunctionComponent = () => {
     );
 }
 
-export default CreateLink;
+export default OpenLink;
