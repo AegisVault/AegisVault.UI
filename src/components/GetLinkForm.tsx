@@ -17,7 +17,7 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
 
     const makeApiRequest = (password: string) => {
         setIsLoading(true);
-        axios.post(RETRIEVE_API_BASE + 'v1/CreateLink', {
+        axios.post(RETRIEVE_API_BASE + 'v1/CreateRedirectLink', {
             Id: props.id,
             Password: password
         })

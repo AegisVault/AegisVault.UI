@@ -5,9 +5,6 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
-import { route } from 'preact-router';
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import { IconButton, IconButtonProps } from '@mui/joy';
 import { useEffect, useState } from 'preact/hooks';
 

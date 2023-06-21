@@ -1,8 +1,8 @@
 
-import { Button, FormControl, FormLabel, Box, Typography, Input, Grid, Container, IconButton, IconButtonProps, useColorScheme } from '@mui/joy';
+import { Button, FormControl, FormLabel, Typography, Input, Grid, Container} from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { CREATE_API_BASE } from '../api/V1LinkCreation';
 
 
@@ -36,16 +36,15 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
             });
     }
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(link)
-    }
+    // const copyToClipboard = () => {
+    //     navigator.clipboard.writeText(link)
+    // }
 
     return (
         <>
-
             <Container>
                 <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                    Generate Email with Link
+                    Generate Email with Link {isLoading ? "" : ""} {apiSuccess ? "" : ""} {link}
                 </Typography>
                 <br />
                 <form
@@ -64,7 +63,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                             brandPrimaryColor: formElements.brandPrimaryColor.value,
                             brandSecondaryColor: formElements.brandSecondaryColor.value
                         };
-                        makeApiRequest(data.url, data.password);
+                        makeApiRequest(data.brandname, data.url, data.documentType, data.requiredContent, data.name, data.email);
                     }}
                 >
                     <Grid container columnGap={3} spacing={2} sx={{ flexGrow: 1 }}>
