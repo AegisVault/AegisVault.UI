@@ -1,5 +1,12 @@
 import { render } from 'preact'
 import { App } from './app.tsx'
-import './index.css'
+import Router from 'preact-router'
+import CreateLink from './pages/CreateLink.tsx';
 
-render(<App />, document.getElementById('app') as HTMLElement)
+const Main = () => (
+    <Router>
+        <CreateLink path="/" />
+    </Router>
+);
+
+render(<Main/>, document.body)
