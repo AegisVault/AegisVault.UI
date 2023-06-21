@@ -1,9 +1,9 @@
-import { h, FunctionComponent } from 'preact';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import { FunctionComponent } from 'preact';
+import { CssVarsProvider } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
-import FormLabel, { formLabelClasses } from '@mui/joy/FormLabel';
+import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
 import SubmitForm from '../components/SubmitForm';
 
