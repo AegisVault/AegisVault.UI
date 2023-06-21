@@ -2,18 +2,23 @@
 import { Button, FormControl, FormLabel, Box, Typography, Input } from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent } from 'preact';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { RETRIEVE_API_BASE } from '../api/V1LinkCreation';
 
-const SubmitForm: FunctionComponent = () => {
+interface RouteParams {
+    id?: string,
+    path: string
+  }
+  
+const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
     const [link, setLink] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState(false);
 
-    const makeApiRequest = (url: string, password: string) => {
+    const makeApiRequest = (password: string) => {
         setIsLoading(true);
         axios.post(RETRIEVE_API_BASE + 'v1/CreateLink', {
-            URL: url,
+            Id: props.id,
             Password: password
         })
             .then(function (response) {
@@ -40,7 +45,7 @@ const SubmitForm: FunctionComponent = () => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <h1 onClick={copyToClipboard}>Success, click here to copy your link</h1>
+                        <h1 href={link}>Success, click here to open your link</h1>
                         <h4>{link}</h4>
                         <Button onClick={copyToClipboard}>Copy</Button>
                     </>
@@ -48,7 +53,7 @@ const SubmitForm: FunctionComponent = () => {
                         <div>
                             <div>
                                 <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                                    Create document link
+                                    Open Document Link
                                 </Typography>
                             </div>
                             {/* Added break in here due to user feedback */}
@@ -59,18 +64,12 @@ const SubmitForm: FunctionComponent = () => {
                                     const formElements = event.currentTarget.elements;
                                     debugger;
                                     const data = {
-                                        url: formElements.url.value,
                                         password: formElements.password.value,
                                     };
-                                    makeApiRequest(data.url, data.password);
+                                    makeApiRequest(data.password);
                                     alert(JSON.stringify(data, null, 2));
                                 }}
                             >
-                                <FormControl required>
-                                    <FormLabel>Url</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="url" />
-                                </FormControl>
                                 <FormControl required>
                                     <FormLabel>Password</FormLabel>
                                     {/* @ts-ignore */}
@@ -94,4 +93,4 @@ const SubmitForm: FunctionComponent = () => {
         </>)
 }
 
-export default SubmitForm; 
+export default GetLinkForm; 

@@ -5,30 +5,30 @@ import { FunctionComponent } from 'preact';
 import { useState } from 'preact/hooks';
 import { RETRIEVE_API_BASE } from '../api/V1LinkCreation';
 
-const SubmitForm: FunctionComponent = () => {
+const SubmitLinkForm: FunctionComponent = () => {
     const [link, setLink] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState(false);
 
-    const makeApiRequest = (id: string, password: string) => {
+    const makeApiRequest = (url: string, password: string) => {
         setIsLoading(true);
         axios.post(RETRIEVE_API_BASE + 'v1/CreateLink', {
-            Id: id,
+            URL: url,
             Password: password
         })
-        .then(function (response) {
-            // handle success
-            setLink(response.data.Link);
-            setIsLoading(false);
-            setApiSuccess(true);
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-            setLink("");
-            setIsLoading(false);
-            setApiSuccess(false);
-        });
+            .then(function (response) {
+                // handle success
+                setLink(response.data.Link);
+                setIsLoading(false);
+                setApiSuccess(true);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                setLink("");
+                setIsLoading(false);
+                setApiSuccess(false);
+            });
     }
 
     const copyToClipboard = () => {
@@ -40,7 +40,7 @@ const SubmitForm: FunctionComponent = () => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <h1 href={link}>Success, click here to open your link</h1>
+                        <h1 onClick={copyToClipboard}>Success, click here to copy your link</h1>
                         <h4>{link}</h4>
                         <Button onClick={copyToClipboard}>Copy</Button>
                     </>
@@ -48,7 +48,7 @@ const SubmitForm: FunctionComponent = () => {
                         <div>
                             <div>
                                 <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                                    Open Document Link
+                                    Create document link
                                 </Typography>
                             </div>
                             {/* Added break in here due to user feedback */}
@@ -59,12 +59,18 @@ const SubmitForm: FunctionComponent = () => {
                                     const formElements = event.currentTarget.elements;
                                     debugger;
                                     const data = {
+                                        url: formElements.url.value,
                                         password: formElements.password.value,
                                     };
-                                    makeApiRequest("abc", data.password);
+                                    makeApiRequest(data.url, data.password);
                                     alert(JSON.stringify(data, null, 2));
                                 }}
                             >
+                                <FormControl required>
+                                    <FormLabel>Url</FormLabel>
+                                    {/* @ts-ignore */}
+                                    <Input name="url" />
+                                </FormControl>
                                 <FormControl required>
                                     <FormLabel>Password</FormLabel>
                                     {/* @ts-ignore */}
@@ -88,4 +94,4 @@ const SubmitForm: FunctionComponent = () => {
         </>)
 }
 
-export default SubmitForm; 
+export default SubmitLinkForm; 

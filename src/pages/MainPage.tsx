@@ -5,9 +5,12 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
-import SubmitForm from '../components/SubmitLinkForm';
+import SubmitForm from '../components/GetLinkForm';
 
-const CreateLink: FunctionComponent = () => {
+
+
+
+const MainPage: FunctionComponent<{title: string}> = ({title, children}) => {
     return (
         <div>
             <CssVarsProvider
@@ -106,7 +109,7 @@ const CreateLink: FunctionComponent = () => {
                                 },
                             }}
                         >
-                            <SubmitForm/>
+                            {children}
                         </Box>
                         <Box component="footer" sx={{ py: 3 }}>
                             <Typography level="body3" textAlign="center">
@@ -131,8 +134,8 @@ const CreateLink: FunctionComponent = () => {
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         backgroundImage:
-                            'url(https://images.unsplash.com/photo-1582135739786-3bceafcaea85?auto=format&w=1000&dpr=2)',
-                        [theme.getColorSchemeSelector('light')]: {
+                            'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&w=1000&dpr=2)',
+                        [theme.getColorSchemeSelector('dark')]: {
                             backgroundImage:
                                 'url(https://images.unsplash.com/photo-1582135739786-3bceafcaea85?auto=format&w=1000&dpr=2)',
                         },
@@ -143,4 +146,4 @@ const CreateLink: FunctionComponent = () => {
     );
 }
 
-export default CreateLink;
+export default MainPage;
