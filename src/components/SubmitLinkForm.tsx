@@ -12,7 +12,7 @@ const SubmitLinkForm: FunctionComponent = () => {
 
     const makeApiRequest = (url: string, password: string) => {
         setIsLoading(true);
-        axios.post(CREATE_API_BASE + 'v1/CreateLink', {
+        axios.post(CREATE_API_BASE + 'v1/CreateRedirectLink', {
             URL: url,
             Password: password
         })
