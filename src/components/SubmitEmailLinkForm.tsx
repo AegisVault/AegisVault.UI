@@ -1,5 +1,5 @@
 
-import { Button, FormControl, FormLabel, Typography, Input, Grid, Container, Textarea } from '@mui/joy';
+import { Button, FormControl, FormLabel, Typography, Input, Grid, Container } from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent, ComponentChild } from 'preact';
 import { useState } from 'preact/hooks';
