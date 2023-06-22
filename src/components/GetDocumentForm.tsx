@@ -56,7 +56,10 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
                     ? <>
                         <h1 href={link}>Success, item has been downloaded</h1>
                         <h4>{link}</h4>
-                        <Button onClick={makeApiRequest(password)}>Re-Download</Button>
+                        <Button onClick={(event: any) => {
+                            event.preventDefault();
+                            makeApiRequest(password);
+                        }}>Re-Download</Button>
                     </>
                     : <>
                         <div>
