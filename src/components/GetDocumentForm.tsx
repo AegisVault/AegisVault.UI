@@ -17,7 +17,7 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
     const [password, setPassword] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState<boolean | undefined>(undefined);
-    const [downloadingProgress, setDownloadingProgress] = useState<number>(25);
+    const [downloadingProgress, setDownloadingProgress] = useState<number>(0);
 
     const makeApiRequest = (password: string) => {
         setIsLoading(true);
