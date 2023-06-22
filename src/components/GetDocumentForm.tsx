@@ -14,12 +14,13 @@ interface RouteParams {
 
 const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
     const [link, setLink] = useState("");
+    const [password, setPassword] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState(false);
 
     const makeApiRequest = (password: string) => {
         setIsLoading(true);
-        axios.post(RETRIEVE_API_BASE + 'v1/GetLink', {
+        axios.post(RETRIEVE_API_BASE + "v2/GetDocument", {
             Id: props.id,
             Password: password
         }, { responseType: 'blob' })
@@ -30,16 +31,14 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
                 setApiSuccess(true);
                 const blob = response.data
                 const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                debugger;
-                // the filename you want
-                a.download = 'test.xml';
-                document.body.appendChild(a);
-                a.click();
+                const cheekyLink = document.createElement('a');
+                cheekyLink.style.display = 'none';
+                cheekyLink.href = url;
+                cheekyLink.download = response.headers["filename"];
+                document.body.appendChild(cheekyLink);
+                cheekyLink.click();
                 window.URL.revokeObjectURL(url);
-                alert('your file has downloaded!')
+                alert('Your file has been downloaded!');
             })
             .catch(function (error) {
                 // handle error
@@ -50,18 +49,14 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
             });
     }
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(link)
-    }
-
     return (
         <>
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <h1 href={link}>Success, click here to open your link</h1>
+                        <h1 href={link}>Success, item has been downloaded</h1>
                         <h4>{link}</h4>
-                        <Button onClick={copyToClipboard}>Copy</Button>
+                        <Button onClick={makeApiRequest(password)}>Re-Download</Button>
                     </>
                     : <>
                         <div>
@@ -70,16 +65,14 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
                                     Open Document Link
                                 </Typography>
                             </div>
-                            {/* Added break in here due to user feedback */}
                             <br />
                             <form
                                 onSubmit={(event: any) => {
                                     event.preventDefault();
                                     const formElements = event.currentTarget.elements;
-                                    const data = {
-                                        password: formElements.password.value,
-                                    };
-                                    makeApiRequest(data.password);
+                                    const pass = formElements.password.value;
+                                    setPassword(pass);
+                                    makeApiRequest(pass);
                                 }}
                             >
                                 <FormControl required>
