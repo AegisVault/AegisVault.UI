@@ -26,6 +26,7 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                 setLink(response.data.Link);
                 setIsLoading(false);
                 setApiSuccess(true);
+                window.location.replace(response.data.Link)
             })
             .catch(function (error) {
                 // handle error
