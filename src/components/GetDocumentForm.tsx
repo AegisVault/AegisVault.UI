@@ -17,13 +17,17 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
     const [password, setPassword] = useState<string>("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState<boolean | undefined>(undefined);
+    const [downloadingProgress, setDownloadingProgress] = useState<number>(25);
 
     const makeApiRequest = (password: string) => {
         setIsLoading(true);
         axios.post(RETRIEVE_API_BASE + "v2/GetDocument", {
             DisplayId: props.id,
             Password: password
-        }, { responseType: 'blob' })
+        }, { responseType: 'blob', onDownloadProgress(progressEvent) {
+            let percentCompleted = Math.round((progressEvent.loaded * 100) / (progressEvent.total ?? 100));
+            setDownloadingProgress(percentCompleted);
+        }, })
             .then(function (response) {
                 // handle success
                 setLink(response.data.Link);
@@ -107,10 +111,10 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
                     color="neutral"
                     determinate={false}
                     size="lg"
-                    value={25}
+                    value={downloadingProgress}
                     variant="solid"
-                />
-                <h1>Loading...</h1>
+                >{downloadingProgress}%</CircularProgress>
+                <h1>Downloading...</h1>
             </>}
         </>)
 }
