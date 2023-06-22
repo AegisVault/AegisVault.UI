@@ -12,7 +12,7 @@ const HomePage: FunctionComponent = () => {
             <br/>
             <Button size="lg" color='neutral' onClick={() => route('/file')}>Create Document</Button>
             <br/>
-            <Button size="lg" color='neutral' onClick={() => route('/emailfile')}>Generate Email with File</Button>
+            <Button size="lg" color='neutral' onClick={() => route('/email_file')}>Generate Email with File</Button>
         </div>
     );
 }
