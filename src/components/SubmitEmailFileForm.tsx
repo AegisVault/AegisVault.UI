@@ -1,5 +1,5 @@
 
-import { Button, FormControl, FormLabel, Box, Typography, Input, Grid } from '@mui/joy';
+import { Button, FormControl, FormLabel, Box, Typography, Input, Grid, CircularProgress } from '@mui/joy';
 import axios from 'axios';
 import { ComponentChild, FunctionComponent } from 'preact';
 import { useState } from 'preact/hooks';
@@ -115,9 +115,9 @@ const SubmitEmailFileForm: FunctionComponent = () => {
                                         RequiredContent: formElements.requiredContent.value,
                                         brand: {
                                             brandname: formElements.brandname.value === "" ? "Aegis Vault" : formElements.brandname.value,
-                                            brandLogoUrl: formElements.brandLogoURL.value === "" ? "https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp": formElements.brandLogoURL.value,
-                                            brandPrimaryColor: formElements.brandPrimaryColor.value === "" ? "#EF4C46": formElements.brandPrimaryColor.value,
-                                            brandSecondaryColor: formElements.brandSecondaryColor.value === "" ? "#394855": formElements.brandSecondaryColor.value
+                                            brandLogoUrl: formElements.brandLogoURL.value === "" ? "https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp" : formElements.brandLogoURL.value,
+                                            brandPrimaryColor: formElements.brandPrimaryColor.value === "" ? "#EF4C46" : formElements.brandPrimaryColor.value,
+                                            brandSecondaryColor: formElements.brandSecondaryColor.value === "" ? "#394855" : formElements.brandSecondaryColor.value
                                         }
                                     };
                                     makeApiRequest(data);
@@ -228,7 +228,16 @@ const SubmitEmailFileForm: FunctionComponent = () => {
                             </form>
                         </div>
                     </>
-                : <h1>Loading...</h1>}
+                : <>
+                    <CircularProgress
+                        color="neutral"
+                        determinate={false}
+                        size="lg"
+                        value={25}
+                        variant="solid"
+                    />
+                    <h1>Loading...</h1>
+                </>}
         </>)
 }
 

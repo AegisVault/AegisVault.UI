@@ -108,7 +108,16 @@ const SubmitFileForm: FunctionComponent = () => {
                             </form>
                         </div>
                     </>
-                : <h1>Loading...</h1>}
+                : <>
+                <CircularProgress
+                    color="neutral"
+                    determinate={false}
+                    size="lg"
+                    value={25}
+                    variant="solid"
+                />
+                <h1>Loading...</h1>
+            </>}
         </>)
 }
 

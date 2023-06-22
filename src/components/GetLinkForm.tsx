@@ -1,5 +1,5 @@
 
-import { Button, FormControl, FormLabel, Box, Typography, Input } from '@mui/joy';
+import { Button, FormControl, FormLabel, Box, Typography, Input, CircularProgress } from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent } from 'preact';
 import { useState } from 'preact/hooks';
@@ -93,7 +93,16 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                             </form>
                         </div>
                     </>
-                : <h1>Loading...</h1>}
+                : <>
+                <CircularProgress
+                    color="neutral"
+                    determinate={false}
+                    size="lg"
+                    value={25}
+                    variant="solid"
+                />
+                <h1>Loading...</h1>
+            </>}
         </>)
 }
 

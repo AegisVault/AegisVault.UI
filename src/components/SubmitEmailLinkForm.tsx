@@ -1,5 +1,5 @@
 
-import { Button, FormControl, FormLabel, Typography, Input, Grid, Container } from '@mui/joy';
+import { Button, FormControl, FormLabel, Typography, Input, Grid, Container, CircularProgress } from '@mui/joy';
 import axios from 'axios';
 import { FunctionComponent, ComponentChild } from 'preact';
 import { useState } from 'preact/hooks';
@@ -79,122 +79,133 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
 
     return (
         <>
-            <Container>
-                <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                    Generate Email with Link {isLoading ? "" : ""} {apiSuccess ? "" : ""} {link}
-                </Typography>
-                <br />
-                <form
-                    onSubmit={(event: any) => {
-                        event.preventDefault();
-                        const formElements = event.currentTarget.elements;
-                        const data: FormDetails = {
-                            Link: {
-                                Url: formElements.url.value,
-                                Password: formElements.password.value
-                            },
-                            Email: formElements.email.value,
-                            Name: formElements.name.value,
-                            DocumentType: formElements.documentType.value,
-                            RequiredContent: formElements.requiredContent.value,
-                            brand: {
-                                brandname: formElements.brandname.value === "" ? "Aegis Vault" : formElements.brandname.value,
-                                brandLogoUrl: formElements.brandLogoURL.value === "" ? "https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp": formElements.brandLogoURL.value,
-                                brandPrimaryColor: formElements.brandPrimaryColor.value === "" ? "#EF4C46": formElements.brandPrimaryColor.value,
-                                brandSecondaryColor: formElements.brandSecondaryColor.value === "" ? "#394855": formElements.brandSecondaryColor.value
-                            }
-                        };
-                        makeApiRequest(data);
-                    }}
-                >
-                    <Grid container columnGap={3} spacing={2} sx={{ flexGrow: 1 }}>
-                        <Grid item xs={12}>
-                            <fieldset>
-                                <legend>Link Details</legend>
-                                <Grid container spacing={3}>
-                                    <Grid item xs={6}>
-                                        <FormControl required fullWidth>
-                                            <FormLabel>URL</FormLabel>
-                                            {/* @ts-ignore */}
-                                            <Input name="url" />
-                                        </FormControl>
+            {!isLoading ?
+                <Container>
+                    <Typography component="h1" fontSize="xl2" fontWeight="lg">
+                        Generate Email with Link {isLoading ? "" : ""} {apiSuccess ? "" : ""} {link}
+                    </Typography>
+                    <br />
+                    <form
+                        onSubmit={(event: any) => {
+                            event.preventDefault();
+                            const formElements = event.currentTarget.elements;
+                            const data: FormDetails = {
+                                Link: {
+                                    Url: formElements.url.value,
+                                    Password: formElements.password.value
+                                },
+                                Email: formElements.email.value,
+                                Name: formElements.name.value,
+                                DocumentType: formElements.documentType.value,
+                                RequiredContent: formElements.requiredContent.value,
+                                brand: {
+                                    brandname: formElements.brandname.value === "" ? "Aegis Vault" : formElements.brandname.value,
+                                    brandLogoUrl: formElements.brandLogoURL.value === "" ? "https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp" : formElements.brandLogoURL.value,
+                                    brandPrimaryColor: formElements.brandPrimaryColor.value === "" ? "#EF4C46" : formElements.brandPrimaryColor.value,
+                                    brandSecondaryColor: formElements.brandSecondaryColor.value === "" ? "#394855" : formElements.brandSecondaryColor.value
+                                }
+                            };
+                            makeApiRequest(data);
+                        }}
+                    >
+                        <Grid container columnGap={3} spacing={2} sx={{ flexGrow: 1 }}>
+                            <Grid item xs={12}>
+                                <fieldset>
+                                    <legend>Link Details</legend>
+                                    <Grid container spacing={3}>
+                                        <Grid item xs={6}>
+                                            <FormControl required fullWidth>
+                                                <FormLabel>URL</FormLabel>
+                                                {/* @ts-ignore */}
+                                                <Input name="url" />
+                                            </FormControl>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <FormControl required fullWidth>
+                                                <FormLabel>Password</FormLabel>
+                                                {/* @ts-ignore */}
+                                                <Input type="password" name="password" />
+                                            </FormControl>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                        <FormControl required fullWidth>
-                                            <FormLabel>Password</FormLabel>
+                                </fieldset>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <fieldset>
+                                    <legend>Email Details</legend>
+                                    <FormControl required >
+                                        <FormLabel>Recipient Email</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input type="email" name="email" />
+                                    </FormControl>
+                                    <FormControl required >
+                                        <FormLabel>Recipient Name</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="name" />
+                                    </FormControl>
+                                    <FormControl required >
+                                        <FormLabel>Email Theme</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="documentType" placeholder="Policy Renewal, Policy Cancellation" />
+                                    </FormControl>
+                                    <FormControl required >
+                                        <FormLabel>Required Content</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="requiredContent" placeholder="General ideas to convey on email." minRows={3}
+                                        />
+                                    </FormControl>
+                                </fieldset>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <fieldset>
+                                    <legend onClick={() => setBrandDetailsOpen(!brandDetailsOpen)}>
+                                        Brand Details - Default Set {brandDetailsOpen ? <KeyboardArrowUp fontSize="large" /> : <KeyboardArrowDown fontSize="large" />}
+                                    </legend>
+                                    <Collapse in={brandDetailsOpen}>
+                                        <FormControl required>
+                                            <FormLabel>Brand Name</FormLabel>
                                             {/* @ts-ignore */}
-                                            <Input type="password" name="password" />
+                                            <Input name="brandname" placeholder="Aegis Vault" />
                                         </FormControl>
-                                    </Grid>
-                                </Grid>
-                            </fieldset>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <fieldset>
-                                <legend>Email Details</legend>
-                                <FormControl required >
-                                    <FormLabel>Recipient Email</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input type="email" name="email" />
-                                </FormControl>
-                                <FormControl required >
-                                    <FormLabel>Recipient Name</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="name" />
-                                </FormControl>
-                                <FormControl required >
-                                    <FormLabel>Email Theme</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="documentType" placeholder="Policy Renewal, Policy Cancellation" />
-                                </FormControl>
-                                <FormControl required >
-                                    <FormLabel>Required Content</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="requiredContent" placeholder="General ideas to convey on email." minRows={3}
-                                         />
-                                </FormControl>
-                            </fieldset>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <fieldset>
-                                <legend onClick={() => setBrandDetailsOpen(!brandDetailsOpen)}>
-                                    Brand Details - Default Set {brandDetailsOpen ? <KeyboardArrowUp fontSize="large" /> : <KeyboardArrowDown fontSize="large" />}
-                                </legend>
-                                <Collapse in={brandDetailsOpen}>
-                                    <FormControl required>
-                                        <FormLabel>Brand Name</FormLabel>
-                                        {/* @ts-ignore */}
-                                        <Input name="brandname" placeholder="Aegis Vault" />
-                                    </FormControl>
 
-                                    <FormControl required >
-                                        <FormLabel>Brand Logo URL</FormLabel>
-                                        {/* @ts-ignore */}
-                                        <Input name="brandLogoURL" placeholder="https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp" />
-                                    </FormControl>
+                                        <FormControl required >
+                                            <FormLabel>Brand Logo URL</FormLabel>
+                                            {/* @ts-ignore */}
+                                            <Input name="brandLogoURL" placeholder="https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp" />
+                                        </FormControl>
 
-                                    <FormControl required >
-                                        <FormLabel>Brand Primary Color</FormLabel>
-                                        {/* @ts-ignore */}
-                                        <Input name="brandPrimaryColor" placeholder="#EF4C46" />
-                                    </FormControl>
+                                        <FormControl required >
+                                            <FormLabel>Brand Primary Color</FormLabel>
+                                            {/* @ts-ignore */}
+                                            <Input name="brandPrimaryColor" placeholder="#EF4C46" />
+                                        </FormControl>
 
-                                    <FormControl required >
-                                        <FormLabel>Brand Secondary Color</FormLabel>
-                                        {/* @ts-ignore */}
-                                        <Input name="brandSecondaryColor" placeholder="#394855" />
-                                    </FormControl>
-                                </Collapse>
-                            </fieldset>
+                                        <FormControl required >
+                                            <FormLabel>Brand Secondary Color</FormLabel>
+                                            {/* @ts-ignore */}
+                                            <Input name="brandSecondaryColor" placeholder="#394855" />
+                                        </FormControl>
+                                    </Collapse>
+                                </fieldset>
+                            </Grid>
+
                         </Grid>
 
-                    </Grid>
-
-                    <Button color="info" type="submit" fullWidth>
-                        Submit
-                    </Button>
-                </form>
-            </Container>
+                        <Button color="info" type="submit" fullWidth>
+                            Submit
+                        </Button>
+                    </form>
+                </Container>
+                : <>
+                    <CircularProgress
+                        color="neutral"
+                        determinate={false}
+                        size="lg"
+                        value={25}
+                        variant="solid"
+                    />
+                    <h1>Loading...</h1>
+                </>}
         </>
     );
 };
