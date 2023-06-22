@@ -5,12 +5,14 @@ import { route } from 'preact-router';
 const HomePage: FunctionComponent = () => {
     return (
         <div style={{"display": "flex", "alignItems": "centre", "flexDirection": "column"}}>
-            <h1>Choose Your Poison:</h1>
-            <Button size="lg" onClick={() => route('/link')}>Create Link</Button>
+            <h3>Choose Your Poison:</h3>
+            <Button size="lg" color='neutral' onClick={() => route('/link')}>Create Link</Button>
             <br/>
-            <Button size="lg" onClick={() => route('/email')}>Generate Email with Link</Button>
+            <Button size="lg" color='neutral' onClick={() => route('/emaillink')}>Generate Email with Link</Button>
             <br/>
-            <Button size="lg" disabled>Create Document</Button>
+            <Button size="lg" color='neutral' onClick={() => route('/file')}>Create Document</Button>
+            <br/>
+            <Button size="lg" color='neutral' onClick={() => route('/emailfile')}>Generate Email with File</Button>
         </div>
     );
 }
