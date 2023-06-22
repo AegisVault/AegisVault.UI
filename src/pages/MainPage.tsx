@@ -10,6 +10,7 @@ import { useEffect, useState } from 'preact/hooks';
 import logo from '../assets/Aegisvault_Logo_Circle.webp';
 import vaulthex from "../assets/vaultHex.webp";
 import vaultdoor from "../assets/vaultDoor.webp";
+import { route } from 'preact-router';
 
 function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
     const { mode, setMode } = useColorScheme();
@@ -116,6 +117,7 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                             <Typography
                                 fontSize="30px"
                                 fontWeight="lg"
+                                onClick={() => route('/')}
                                 style={{
                                     gridRow: '1', // Be in the first row
                                     gridColumn: '2', // Be in the second column
@@ -124,6 +126,7 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                                 AegisVault
                             </Typography>
                             <Typography
+                                onClick={() => route('/')}
                                 style={{
                                     gridRow: '2', // Be in the second row
                                     gridColumn: '2', // Be in the second column
@@ -185,7 +188,7 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                             `url(${vaultdoor})`,
                         [theme.getColorSchemeSelector('dark')]: {
                             backgroundImage:
-                            `url(${vaulthex})`,
+                                `url(${vaulthex})`,
                         },
                     })}
                 />
