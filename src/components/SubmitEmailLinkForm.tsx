@@ -175,25 +175,25 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                                         Brand Details - Default Set {brandDetailsOpen ? <KeyboardArrowUp fontSize="large" /> : <KeyboardArrowDown fontSize="large" />}
                                     </legend>
                                     <Collapse in={brandDetailsOpen}>
-                                        <FormControl required>
+                                        <FormControl>
                                             <FormLabel>Brand Name</FormLabel>
                                             {/* @ts-ignore */}
                                             <Input name="brandname" placeholder="Aegis Vault" />
                                         </FormControl>
 
-                                        <FormControl required >
+                                        <FormControl>
                                             <FormLabel>Brand Logo URL</FormLabel>
                                             {/* @ts-ignore */}
                                             <Input name="brandLogoURL" placeholder="https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp" />
                                         </FormControl>
 
-                                        <FormControl required >
+                                        <FormControl>
                                             <FormLabel>Brand Primary Color</FormLabel>
                                             {/* @ts-ignore */}
                                             <Input name="brandPrimaryColor" placeholder="#EF4C46" />
                                         </FormControl>
 
-                                        <FormControl required >
+                                        <FormControl>
                                             <FormLabel>Brand Secondary Color</FormLabel>
                                             {/* @ts-ignore */}
                                             <Input name="brandSecondaryColor" placeholder="#394855" />
