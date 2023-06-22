@@ -50,8 +50,8 @@ const SubmitFileForm: FunctionComponent = () => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <h1 onClick={copyToClipboard}>Success, click here to copy your link</h1>
-                        <h4>{link}</h4>
+                        <Typography onClick={copyToClipboard}>Success, click here to copy your link</Typography>
+                        <Typography level="h4">{link}</Typography>
                         <Button onClick={copyToClipboard}>Copy</Button>
                     </>
                     : <>
@@ -116,7 +116,7 @@ const SubmitFileForm: FunctionComponent = () => {
                     value={25}
                     variant="solid"
                 />
-                <h1>Loading...</h1>
+                <Typography>Loading...</Typography>
             </>}
         </>)
 }

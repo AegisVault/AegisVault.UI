@@ -58,8 +58,8 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <h1 href={link}>Success, item has been downloaded</h1>
-                        <h4>{link}</h4>
+                        <Typography href={link}>Success, item has been downloaded</Typography>
+                        <Typography level='h4'>{link}</Typography>
                         <Button onClick={(event: any) => {
                             event.preventDefault();
                             makeApiRequest(password);
@@ -114,7 +114,7 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
                     value={downloadingProgress}
                     variant="solid"
                 >{downloadingProgress}%</CircularProgress>
-                <h1>Downloading...</h1>
+                <Typography>Downloading...</Typography>
             </>}
         </>)
 }

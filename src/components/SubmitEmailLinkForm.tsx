@@ -44,6 +44,10 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
     const [apiSuccess, setApiSuccess] = useState(false);
     const [brandDetailsOpen, setBrandDetailsOpen] = useState(false);
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(link)
+    }
+
     const makeApiRequest = (data: FormDetails) => {
         setIsLoading(true);
         axios.post(CREATE_API_BASE + 'v1/CreateRedirectEmail', {
@@ -78,8 +82,17 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
     }
 
     return (
-        <>
+<>
             {!isLoading ?
+                apiSuccess
+                    ? <>
+                        <Typography onClick={copyToClipboard}>
+                            Success. Your email should arrive within the next 5-10 minutes. (Normally before).
+                            If needed, click below to copy the link</Typography>
+                        <Typography level='h4'>{link}</Typography>
+                        <Button onClick={copyToClipboard}>Copy</Button>
+                    </>
+                    : <>
                 <Container>
                     <Typography component="h1" fontSize="xl2" fontWeight="lg">
                         Generate Email with Link {isLoading ? "" : ""} {apiSuccess ? "" : ""} {link}
@@ -196,6 +209,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                         </Button>
                     </form>
                 </Container>
+                </>
                 : <>
                     <CircularProgress
                         color="neutral"
@@ -204,7 +218,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                         value={25}
                         variant="solid"
                     />
-                    <h1>Loading...</h1>
+                    <Typography>Loading...</Typography>
                 </>}
         </>
     );

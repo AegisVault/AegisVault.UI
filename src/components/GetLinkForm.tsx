@@ -46,8 +46,8 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <h1 href={link}>Success, click here to open your link</h1>
-                        <h4>{link}</h4>
+                        <Typography href={link}>Success, click here to open your link</Typography>
+                        <Typography level='h4'>{link}</Typography>
                         <Button onClick={copyToClipboard}>Copy</Button>
                     </>
                     : <>
@@ -101,7 +101,7 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                     value={25}
                     variant="solid"
                 />
-                <h1>Loading...</h1>
+                <Typography>Loading...</Typography>
             </>}
         </>)
 }
