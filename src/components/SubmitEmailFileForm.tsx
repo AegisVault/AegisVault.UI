@@ -222,7 +222,7 @@ const SubmitEmailFileForm: FunctionComponent = () => {
 
                                 </Grid>
 
-                                <Button type="submit" fullWidth>
+                                <Button color="info" type="submit" fullWidth>
                                     Submit
                                 </Button>
                             </form>

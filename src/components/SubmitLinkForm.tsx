@@ -48,7 +48,7 @@ const SubmitLinkForm: FunctionComponent = () => {
                         <div>
                             <div>
                                 <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                                    Create Redirection link
+                                    Create Redirection Link
                                 </Typography>
                             </div>
                             {/* Added break in here due to user feedback */}
@@ -82,7 +82,7 @@ const SubmitLinkForm: FunctionComponent = () => {
                                     }}
                                 >
                                 </Box>
-                                <Button type="submit" fullWidth>
+                                <Button color="info" type="submit" fullWidth>
                                     Submit
                                 </Button>
                             </form>

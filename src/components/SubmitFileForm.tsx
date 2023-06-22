@@ -102,7 +102,7 @@ const SubmitFileForm: FunctionComponent = () => {
                                     }}
                                 >
                                 </Box>
-                                <Button type="submit" fullWidth>
+                                <Button color="info" type="submit" fullWidth>
                                     Submit
                                 </Button>
                             </form>

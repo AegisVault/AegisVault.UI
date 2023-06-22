@@ -96,7 +96,7 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
                                         Error: Password or Identifier incorrect. Please try again, or contact support.
                                     </Typography>
                                 }
-                                <Button type="submit" fullWidth>
+                                <Button color="info" type="submit" fullWidth>
                                     Submit
                                 </Button>
                             </form>

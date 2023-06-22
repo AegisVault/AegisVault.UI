@@ -7,7 +7,7 @@ import { formLabelClasses } from '@mui/joy/FormLabel';
 import Typography from '@mui/joy/Typography';
 import { IconButton, IconButtonProps } from '@mui/joy';
 import { useEffect, useState } from 'preact/hooks';
-import logo from '../assets/Aegisvault_Logo_Circle.png';
+import logo from '../assets/Aegisvault_Logo_Circle.webp';
 import vaulthex from "../assets/vaultHex.png";
 
 function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
@@ -124,7 +124,6 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                             </Typography>
                             <Typography
                                 style={{
-                                    color: '#394855',
                                     gridRow: '2', // Be in the second row
                                     gridColumn: '2', // Be in the second column
                                 }}

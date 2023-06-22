@@ -54,7 +54,7 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                         <div>
                             <div>
                                 <Typography component="h1" fontSize="xl2" fontWeight="lg">
-                                    Open Document Link
+                                    Open Secure Link
                                 </Typography>
                             </div>
                             {/* Added break in here due to user feedback */}
@@ -87,7 +87,7 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                                         Error: Password or Identifier incorrect. Please try again, or contact support.
                                     </Typography>
                                 }
-                                <Button type="submit" fullWidth>
+                                <Button color="info" type="submit" fullWidth>
                                     Submit
                                 </Button>
                             </form>
