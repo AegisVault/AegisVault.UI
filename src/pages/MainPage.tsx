@@ -185,7 +185,7 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                             'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&w=1000&dpr=2)',
                         [theme.getColorSchemeSelector('dark')]: {
                             backgroundImage:
-                            'url(/assets/vaultHex.png)',
+                            `url(${vaultdoor})`,
                         },
                     })}
                 />
