@@ -14,7 +14,7 @@ interface CollapseProps {
 interface FormDetails {
     brand: {
         brandname: string;
-        brandlogoURL: string;
+        brandlogoUrl: string;
         brandPrimaryColor: string;
         brandSecondaryColor: string;
     };
@@ -47,10 +47,10 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
     const makeApiRequest = (data: FormDetails) => {
         setIsLoading(true);
         axios.post(CREATE_API_BASE + 'v1/CreateRedirectEmail', {
-            //axios.post('http://localhost:7071/api/' + 'v1/CreateRedirectEmail', {    
+             
             brand: {
                 brandname: data.brand.brandname,
-                brandlogoURL: data.brand.brandlogoURL,
+                brandlogoURL: data.brand.brandlogoUrl,
                 brandPrimaryColor: data.brand.brandPrimaryColor,
                 brandSecondaryColor: data.brand.brandSecondaryColor
             },
