@@ -14,7 +14,7 @@ interface CollapseProps {
 interface FormDetails {
     brand: {
         brandname: string;
-        brandlogoUrl: string;
+        brandLogoUrl: string;
         brandPrimaryColor: string;
         brandSecondaryColor: string;
     };
@@ -50,7 +50,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
              
             brand: {
                 brandname: data.brand.brandname,
-                brandlogoURL: data.brand.brandlogoUrl,
+                brandLogoUrl: data.brand.brandLogoUrl,
                 brandPrimaryColor: data.brand.brandPrimaryColor,
                 brandSecondaryColor: data.brand.brandSecondaryColor
             },
@@ -99,7 +99,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                             RequiredContent: formElements.requiredContent.value,
                             brand: {
                                 brandname: formElements.brandname.value,
-                                brandlogoURL: formElements.brandlogoURL.value,
+                                brandLogoUrl: formElements.brandLogoURL.value,
                                 brandPrimaryColor: formElements.brandPrimaryColor.value,
                                 brandSecondaryColor: formElements.brandSecondaryColor.value
                             }
@@ -170,7 +170,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                                     <FormControl required >
                                         <FormLabel>Brand Logo URL</FormLabel>
                                         {/* @ts-ignore */}
-                                        <Input name="brandlogoURL" defaultValue="https://media.discordapp.net/attachments/1120715800664358942/1121233267010580563/Aegisvault_Logo_Circle.png?width=749&height=749" />
+                                        <Input name="brandLogoURL" defaultValue="https://media.discordapp.net/attachments/1120715800664358942/1121233267010580563/Aegisvault_Logo_Circle.png?width=749&height=749" />
                                     </FormControl>
 
                                     <FormControl required >
