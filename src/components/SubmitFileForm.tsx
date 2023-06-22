@@ -18,7 +18,7 @@ const SubmitFileForm: FunctionComponent = () => {
         formData.append("file", file[0]);
         formData.append("password", password);
         axios.post(CREATE_API_BASE + 'v1/CreateFileLink', formData, {
-            headers:{
+            headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
@@ -80,10 +80,10 @@ const SubmitFileForm: FunctionComponent = () => {
                                         {({ getRootProps, getInputProps }) => (
                                             <section>
                                                 {/* @ts-ignore */}
-                                                <div {...getRootProps({ className: 'dropzone' })}>
+                                                <div {...getRootProps({ className: `dropzone${file.length >= 1 ? 'filled' : 'unfilled'}` })}>
                                                     {/* @ts-ignore */}
                                                     <input {...getInputProps()} />
-                                                    <p>Drag 'n' drop some files here, or click to select</p>
+                                                    <p>{file.length >= 1 ? `Drag and drop or click to replace: "${file[0].name}"` : 'Drag and drop or click here to upload'}</p>
                                                 </div>
                                             </section>
                                         )}

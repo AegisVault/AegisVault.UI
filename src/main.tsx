@@ -7,16 +7,19 @@ import SubmitEmailLinkForm from './components/SubmitEmailLinkForm.tsx';
 import HomePage from './components/HomePage.tsx';
 import SubmitFileForm from './components/SubmitFileForm.tsx';
 import GetDocumentForm from './components/GetDocumentForm.tsx';
+import SubmitEmailFileForm from './components/SubmitEmailFileForm.tsx';
 import "./main.css";
 
 const Routing = () => (
     <Router>
         <HomePage path="/" />
         <SubmitLinkForm path="/link" />
-        <SubmitEmailLinkForm path="/email_link" />
         <GetLinkForm path="/link/:id" />
         <SubmitFileForm path="/file"/>
         <GetDocumentForm path="/file/:id"/>
+        
+        <SubmitEmailLinkForm path="/email_link" />
+        <SubmitEmailFileForm path="/email_file" />
     </Router>
 );
 
