@@ -170,7 +170,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                                     <FormControl required >
                                         <FormLabel>Brand Logo URL</FormLabel>
                                         {/* @ts-ignore */}
-                                        <Input name="brandLogoURL" defaultValue="https://media.discordapp.net/attachments/1120715800664358942/1121233267010580563/Aegisvault_Logo_Circle.png?width=749&height=749" />
+                                        <Input name="brandLogoURL" defaultValue="https://aegisvault.dev/assets/Aegisvault_Logo_Circle-0034a6f9.png" />
                                     </FormControl>
 
                                     <FormControl required >
