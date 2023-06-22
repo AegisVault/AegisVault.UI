@@ -98,10 +98,10 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                             DocumentType: formElements.documentType.value,
                             RequiredContent: formElements.requiredContent.value,
                             brand: {
-                                brandname: formElements.brandname.value,
-                                brandLogoUrl: formElements.brandLogoURL.value,
-                                brandPrimaryColor: formElements.brandPrimaryColor.value,
-                                brandSecondaryColor: formElements.brandSecondaryColor.value
+                                brandname: formElements.brandname.value === "" ? "Aegis Vault" : formElements.brandname.value,
+                                brandLogoUrl: formElements.brandLogoURL.value === "" ? "https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp": formElements.brandLogoURL.value,
+                                brandPrimaryColor: formElements.brandPrimaryColor.value === "" ? "#EF4C46": formElements.brandPrimaryColor.value,
+                                brandSecondaryColor: formElements.brandSecondaryColor.value === "" ? "#394855": formElements.brandSecondaryColor.value
                             }
                         };
                         makeApiRequest(data);
@@ -164,25 +164,25 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                                     <FormControl required>
                                         <FormLabel>Brand Name</FormLabel>
                                         {/* @ts-ignore */}
-                                        <Input name="brandname" defaultValue="Aegis Vault" />
+                                        <Input name="brandname" placeholder="Aegis Vault" />
                                     </FormControl>
 
                                     <FormControl required >
                                         <FormLabel>Brand Logo URL</FormLabel>
                                         {/* @ts-ignore */}
-                                        <Input name="brandLogoURL" defaultValue="https://aegisvault.dev/assets/Aegisvault_Logo_Circle-0034a6f9.png" />
+                                        <Input name="brandLogoURL" placeholder="https://aegisvault.dev/assets/Aegisvault_Logo_Circle-2d5136d5.webp" />
                                     </FormControl>
 
                                     <FormControl required >
                                         <FormLabel>Brand Primary Color</FormLabel>
                                         {/* @ts-ignore */}
-                                        <Input name="brandPrimaryColor" defaultValue="#EF4C46" />
+                                        <Input name="brandPrimaryColor" placeholder="#EF4C46" />
                                     </FormControl>
 
                                     <FormControl required >
                                         <FormLabel>Brand Secondary Color</FormLabel>
                                         {/* @ts-ignore */}
-                                        <Input name="brandSecondaryColor" defaultValue="#394855" />
+                                        <Input name="brandSecondaryColor" placeholder="#394855" />
                                     </FormControl>
                                 </Collapse>
                             </fieldset>
