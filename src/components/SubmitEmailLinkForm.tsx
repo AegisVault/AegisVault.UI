@@ -1,25 +1,67 @@
 
-import { Button, FormControl, FormLabel, Typography, Input, Grid, Container} from '@mui/joy';
+import { Button, FormControl, FormLabel, Typography, Input, Grid, Container, Textarea } from '@mui/joy';
 import axios from 'axios';
-import { FunctionComponent } from 'preact';
+import { FunctionComponent, ComponentChild } from 'preact';
 import { useState } from 'preact/hooks';
 import { CREATE_API_BASE } from '../api/V1LinkCreation';
+import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material';
 
+interface CollapseProps {
+    in: boolean;
+    children: ComponentChild;
+}
+
+interface FormDetails {
+    brand: {
+        brandname: string;
+        brandlogoURL: string;
+        brandPrimaryColor: string;
+        brandSecondaryColor: string;
+    };
+    Link: {
+        Url: string;
+        Password: string;
+    };
+    DocumentType: string;
+    RequiredContent: string;
+    Name: string;
+    Email: string;
+}
+
+const Collapse: FunctionComponent<CollapseProps> = ({ in: isOpen, children }) => {
+    const style = {
+        maxHeight: isOpen ? "1000px" : "0px",
+        transition: "max-height 0.5s ease-in-out",
+        overflow: "hidden",
+    };
+
+    return <div style={style}>{children}</div>;
+};
 
 const SubmitEmailLinkForm: FunctionComponent = () => {
     const [link, setLink] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [apiSuccess, setApiSuccess] = useState(false);
+    const [brandDetailsOpen, setBrandDetailsOpen] = useState(false);
 
-    const makeApiRequest = (brand: string, link: string, documentType: string, requiredContent: string, name: string, email: string) => {
+    const makeApiRequest = (data: FormDetails) => {
         setIsLoading(true);
         axios.post(CREATE_API_BASE + 'v1/CreateRedirectEmail', {
-            brand,
-            link,
-            DocumentType: documentType,
-            RequiredContent: requiredContent,
-            Name: name,
-            Email: email
+            //axios.post('http://localhost:7071/api/' + 'v1/CreateRedirectEmail', {    
+            brand: {
+                brandname: data.brand.brandname,
+                brandlogoURL: data.brand.brandlogoURL,
+                brandPrimaryColor: data.brand.brandPrimaryColor,
+                brandSecondaryColor: data.brand.brandSecondaryColor
+            },
+            Link: {
+                Url: data.Link.Url,
+                Password: data.Link.Password
+            },
+            DocumentType: data.DocumentType,
+            RequiredContent: data.RequiredContent,
+            Name: data.Name,
+            Email: data.Email
         })
             .then(function (response) {
                 // handle success
@@ -36,10 +78,6 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
             });
     }
 
-    // const copyToClipboard = () => {
-    //     navigator.clipboard.writeText(link)
-    // }
-
     return (
         <>
             <Container>
@@ -50,19 +88,23 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                 <form
                     onSubmit={(event: any) => {
                         const formElements = event.currentTarget.elements;
-                        const data = {
-                            url: formElements.url.value,
-                            password: formElements.password.value,
-                            email: formElements.email.value,
-                            name: formElements.name.value,
-                            documentType: formElements.documentType.value,
-                            requiredContent: formElements.requiredContent.value,
-                            brandname: formElements.brandname.value,
-                            brandlogoURL: formElements.brandlogoURL.value,
-                            brandPrimaryColor: formElements.brandPrimaryColor.value,
-                            brandSecondaryColor: formElements.brandSecondaryColor.value
+                        const data: FormDetails = {
+                            Link: {
+                                Url: formElements.url.value,
+                                Password: formElements.password.value
+                            },
+                            Email: formElements.email.value,
+                            Name: formElements.name.value,
+                            DocumentType: formElements.documentType.value,
+                            RequiredContent: formElements.requiredContent.value,
+                            brand: {
+                                brandname: formElements.brandname.value,
+                                brandlogoURL: formElements.brandlogoURL.value,
+                                brandPrimaryColor: formElements.brandPrimaryColor.value,
+                                brandSecondaryColor: formElements.brandSecondaryColor.value
+                            }
                         };
-                        makeApiRequest(data.brandname, data.url, data.documentType, data.requiredContent, data.name, data.email);
+                        makeApiRequest(data);
                     }}
                 >
                     <Grid container columnGap={3} spacing={2} sx={{ flexGrow: 1 }}>
@@ -89,63 +131,63 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <fieldset>
-                                <legend>Other Details</legend>
+                                <legend>Email Details</legend>
                                 <FormControl required >
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Recipient Email</FormLabel>
                                     {/* @ts-ignore */}
                                     <Input type="email" name="email" />
                                 </FormControl>
                                 <FormControl required >
-                                    <FormLabel>Name</FormLabel>
+                                    <FormLabel>Recipient Name</FormLabel>
                                     {/* @ts-ignore */}
                                     <Input name="name" />
                                 </FormControl>
                                 <FormControl required >
-                                    <FormLabel>Document Type</FormLabel>
+                                    <FormLabel>Email Theme</FormLabel>
                                     {/* @ts-ignore */}
-                                    <Input name="documentType" />
+                                    <Input name="documentType" placeholder="Policy Renewal, Policy Cancellation" />
                                 </FormControl>
                                 <FormControl required >
                                     <FormLabel>Required Content</FormLabel>
                                     {/* @ts-ignore */}
-                                    <Input name="requiredContent" />
+                                    <Input name="requiredContent" placeholder="General ideas to convey on email." minRows={3}
+                                         />
                                 </FormControl>
                             </fieldset>
                         </Grid>
                         <Grid item xs={12}>
                             <fieldset>
-                                <legend>Brand Details</legend>
+                                <legend onClick={() => setBrandDetailsOpen(!brandDetailsOpen)}>
+                                    Brand Details - Default Set {brandDetailsOpen ? <KeyboardArrowUp fontSize="large" /> : <KeyboardArrowDown fontSize="large" />}
+                                </legend>
+                                <Collapse in={brandDetailsOpen}>
+                                    <FormControl required>
+                                        <FormLabel>Brand Name</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="brandname" defaultValue="Aegis Vault" />
+                                    </FormControl>
 
-                                <FormControl required>
-                                    <FormLabel>Brand Name</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="brandname" />
-                                </FormControl>
+                                    <FormControl required >
+                                        <FormLabel>Brand Logo URL</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="brandlogoURL" defaultValue="https://media.discordapp.net/attachments/1120715800664358942/1121233267010580563/Aegisvault_Logo_Circle.png?width=749&height=749" />
+                                    </FormControl>
 
+                                    <FormControl required >
+                                        <FormLabel>Brand Primary Color</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="brandPrimaryColor" defaultValue="#EF4C46" />
+                                    </FormControl>
 
-
-                                <FormControl required >
-                                    <FormLabel>Brand Logo URL</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="brandlogoURL" />
-                                </FormControl>
-
-
-                                <FormControl required >
-                                    <FormLabel>Brand Primary Color</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="brandPrimaryColor" />
-                                </FormControl>
-
-
-                                <FormControl required >
-                                    <FormLabel>Brand Secondary Color</FormLabel>
-                                    {/* @ts-ignore */}
-                                    <Input name="brandSecondaryColor" />
-                                </FormControl>
-
+                                    <FormControl required >
+                                        <FormLabel>Brand Secondary Color</FormLabel>
+                                        {/* @ts-ignore */}
+                                        <Input name="brandSecondaryColor" defaultValue="#394855" />
+                                    </FormControl>
+                                </Collapse>
                             </fieldset>
                         </Grid>
+
                     </Grid>
 
                     <Button type="submit" fullWidth>
