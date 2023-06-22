@@ -8,7 +8,8 @@ import Typography from '@mui/joy/Typography';
 import { IconButton, IconButtonProps } from '@mui/joy';
 import { useEffect, useState } from 'preact/hooks';
 import logo from '../assets/Aegisvault_Logo_Circle.webp';
-import vaulthex from "../assets/vaultHex.png";
+import vaulthex from "../assets/vaultHex.webp";
+import vaultdoor from "../assets/vaultDoor.webp";
 
 function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
     const { mode, setMode } = useColorScheme();
@@ -181,7 +182,7 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                         backgroundImage:
-                            'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&w=1000&dpr=2)',
+                            `url(${vaultdoor})`,
                         [theme.getColorSchemeSelector('dark')]: {
                             backgroundImage:
                             `url(${vaulthex})`,
