@@ -58,8 +58,8 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <Typography href={link}>Success, item has been downloaded</Typography>
-                        <Typography level='h4'>{link}</Typography>
+                        <Typography component='h1' href={link}>Success, item has been downloaded</Typography>
+                        <Typography component='h4'>{link}</Typography>
                         <Button onClick={(event: any) => {
                             event.preventDefault();
                             makeApiRequest(password);

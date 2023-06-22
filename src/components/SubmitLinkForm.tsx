@@ -40,8 +40,8 @@ const SubmitLinkForm: FunctionComponent = () => {
             {!isLoading ?
                 apiSuccess
                     ? <>
-                        <Typography onClick={copyToClipboard}>Success, click here to copy your link</Typography>
-                        <Typography level="h4">{link}</Typography>
+                        <Typography component="h1" href={link}>Success, click here to open your link</Typography>
+                        <Typography component="h4">{link}</Typography>
                         <Button onClick={copyToClipboard}>Copy</Button>
                     </>
                     : <>
