@@ -37,7 +37,7 @@ function ColorSchemeToggle({ onClick, ...props }: IconButtonProps) {
             }}
         >
             <img
-                src="src/assets/Aegisvault_Logo_Circle.png" // Make sure this is the correct path
+                src="/assets/Aegisvault_Logo_Circle.png" // Make sure this is the correct path
                 style={{
                     width: '100px',
                     height: '100px',
@@ -184,7 +184,7 @@ const MainPage: FunctionComponent<{ title: string }> = ({ title, children }) => 
                             'url(https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&w=1000&dpr=2)',
                         [theme.getColorSchemeSelector('dark')]: {
                             backgroundImage:
-                            'url(src/assets/vaultHex.png)',
+                            'url(/assets/vaultHex.png)',
                         },
                     })}
                 />
