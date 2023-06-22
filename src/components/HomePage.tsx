@@ -8,7 +8,7 @@ const HomePage: FunctionComponent = () => {
             <h3>Choose Your Poison:</h3>
             <Button size="lg" color='neutral' onClick={() => route('/link')}>Create Link</Button>
             <br/>
-            <Button size="lg" color='neutral' onClick={() => route('/emaillink')}>Generate Email with Link</Button>
+            <Button size="lg" color='neutral' onClick={() => route('/email_link')}>Generate Email with Link</Button>
             <br/>
             <Button size="lg" color='neutral' onClick={() => route('/file')}>Create Document</Button>
             <br/>

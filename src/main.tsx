@@ -13,7 +13,7 @@ const Routing = () => (
     <Router>
         <HomePage path="/" />
         <SubmitLinkForm path="/link" />
-        <SubmitEmailLinkForm path="/email" />
+        <SubmitEmailLinkForm path="/email_link" />
         <GetLinkForm path="/link/:id" />
         <SubmitFileForm path="/file"/>
         <GetDocumentForm path="/file/:id"/>
