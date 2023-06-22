@@ -13,7 +13,7 @@ interface RouteParams {
 const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
     const [link, setLink] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [apiSuccess, setApiSuccess] = useState(false);
+    const [apiSuccess, setApiSuccess] = useState<boolean | undefined>(undefined);
 
     const makeApiRequest = (password: string) => {
         setIsLoading(true);
@@ -82,6 +82,11 @@ const GetLinkForm: FunctionComponent<RouteParams> = (props) => {
                                     }}
                                 >
                                 </Box>
+                                {apiSuccess == false && apiSuccess != undefined &&
+                                    <Typography color='danger'>
+                                        Error: Password or Identifier incorrect. Please try again, or contact support.
+                                    </Typography>
+                                }
                                 <Button type="submit" fullWidth>
                                     Submit
                                 </Button>
