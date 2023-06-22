@@ -120,7 +120,6 @@ const SubmitEmailFileForm: FunctionComponent = () => {
                                             brandSecondaryColor: formElements.brandSecondaryColor.value === "" ? "#394855": formElements.brandSecondaryColor.value
                                         }
                                     };
-                                    debugger;
                                     makeApiRequest(data);
                                 }}
                             >
