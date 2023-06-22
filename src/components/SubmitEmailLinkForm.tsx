@@ -47,7 +47,6 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
     const makeApiRequest = (data: FormDetails) => {
         setIsLoading(true);
         axios.post(CREATE_API_BASE + 'v1/CreateRedirectEmail', {
-             
             brand: {
                 brandname: data.brand.brandname,
                 brandLogoUrl: data.brand.brandLogoUrl,
@@ -87,6 +86,7 @@ const SubmitEmailLinkForm: FunctionComponent = () => {
                 <br />
                 <form
                     onSubmit={(event: any) => {
+                        event.preventDefault();
                         const formElements = event.currentTarget.elements;
                         const data: FormDetails = {
                             Link: {
