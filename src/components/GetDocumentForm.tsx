@@ -21,7 +21,7 @@ const GetDocumentForm: FunctionComponent<RouteParams> = (props) => {
     const makeApiRequest = (password: string) => {
         setIsLoading(true);
         axios.post(RETRIEVE_API_BASE + "v2/GetDocument", {
-            Id: props.id,
+            DisplayId: props.id,
             Password: password
         }, { responseType: 'blob' })
             .then(function (response) {

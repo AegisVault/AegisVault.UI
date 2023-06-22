@@ -2,7 +2,7 @@
 import { Button, FormControl, FormLabel, Box, Typography, Input, Grid } from '@mui/joy';
 import axios from 'axios';
 import { ComponentChild, FunctionComponent } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { CREATE_API_BASE } from '../api/V1LinkCreation';
 import Dropzone from 'react-dropzone';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
